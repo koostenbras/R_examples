@@ -4,10 +4,11 @@ library(tidyverse)
 library(ggplot2)
 library(ggstatsplot)
 library(BayesFactor)
+
 #reference
 #https://ibecav.netlify.com/post/comparing-frequentist-bayesian-and-simulation-methods-and-conclusions/
 
-###IMPORTING DATA ====
+#### IMPORTING DATA ====
 
 
 male_100_html <- read_html("http://www.alltime-athletics.com/m_100ok.htm")
@@ -38,7 +39,7 @@ male_100
 ## Takes the runner factor and reorders it according to the median by runner.
 male_100$runner <- forcats::fct_reorder(male_100$runner, male_100$timing)
 
-###USING THE GGSTATSPLOT PACKAGE ====
+#### USING THE GGSTATSPLOT PACKAGE ====
 
 ## https://stackoverflow.com/questions/10581440/error-in-grid-calll-textbounds-as-graphicsannotxlabel-xx-xy-polygon
 
@@ -92,7 +93,7 @@ anovaBF(timing ~ runner, data = as.data.frame(male_100), rscaleFixed = .707)
 # Okay that’s better so to Bayesian thinking the odds are 19:1 against the fact that they all run about the same speed, 
 #or 19:1 they run at different speeds.
 
-#### FUNCTION FOR PAIRWISE COMPARISON
+#### FUNCTION FOR PAIRWISE COMPARISON ====
 
 compare_runners_bf <- function(df, runner1, runner2) {
   ds <- df %>%
